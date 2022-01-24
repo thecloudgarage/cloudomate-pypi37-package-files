@@ -83,7 +83,7 @@ class BaseHandler(RequestHandler):
         if isinstance(chunk, dict):
             chunk = str(chunk)
             chunk = json.dumps(chunk)
-
+            self.set_header("Content-Type", "application/json; charset=UTF-8")
         super(BaseHandler, self).write(chunk)
 
     def write_error(self, status_code, **kwargs):
