@@ -82,7 +82,10 @@ class BaseHandler(RequestHandler):
 
         if isinstance(chunk, dict):
             chunk = str(chunk)
+            chunk = chunk.replace("b'", '"')
+            chunk = chunk.replace("'", '"')
             chunk = json.dumps(chunk)
+            chunk = json.loads(chunk.replace("\'", '"'))
             self.set_header("Content-Type", "application/json; charset=UTF-8")
         super(BaseHandler, self).write(chunk)
 
